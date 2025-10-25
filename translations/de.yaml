@@ -1,0 +1,214 @@
+meta:
+  code: de
+  name: Deutsch
+strings:
+  title: Universal Game Automation Bot
+  monitor: Monitor
+  dashboard: Dashboard
+  log: Protokoll
+  settings: Einstellungen
+  templates: Vorlagen
+  tasks: Aufgaben
+  tasks_tab: Aufgaben
+  rois_tab: ROIs
+  roi_list: Interessensbereiche
+  roi_name: ROI-Name
+  roi_coordinates: Koordinaten
+  capture_roi: ROI aufnehmen
+  roi_details: ROI-Details
+  save_to_config: In Config speichern
+  comment: Kommentar
+  pause: Pausieren
+  resume: Fortsetzen
+  stop: Stoppen
+  start: Starten
+  language: Sprache
+  save: Speichern
+  load: Laden
+  add: "Hinzuf\xFCgen"
+  delete: "L\xF6schen"
+  edit: Bearbeiten
+  browse: Durchsuchen...
+  status: Status
+  running: "L\xE4uft"
+  paused: Pausiert
+  stopped: Gestoppt
+  statistics: Statistiken
+  actions_performed: "Durchgef\xFChrte Aktionen"
+  success_rate: Erfolgsquote
+  runtime: Laufzeit
+  errors: Fehler
+  log_level: Protokollebene
+  clear_log: "Protokoll l\xF6schen"
+  auto_scroll: Auto-Scrollen
+  config_saved: Konfiguration erfolgreich gespeichert
+  config_loaded: Konfiguration erfolgreich geladen
+  error_saving: Fehler beim Speichern der Konfiguration
+  error_loading: Fehler beim Laden der Konfiguration
+  template_name: Vorlagenname
+  template_path: Vorlagenpfad
+  template_images: Vorlagenbilder
+  selected_image: "Ausgew\xE4hltes Bild"
+  add_image: "Bild hinzuf\xFCgen"
+  replace_image: Ersetzen
+  remove_image: Entfernen
+  move_up: Nach oben
+  move_down: Nach unten
+  apply_path: "Pfad \xFCbernehmen"
+  template_images_count: '{count}/{max} Bilder'
+  template_image_limit_title: Limit erreicht
+  template_image_limit_body: Maximale Anzahl von Bildern pro Vorlage ist {max}.
+  template_image_invalid_title: "Ung\xFCltiger Pfad"
+  template_image_invalid_body: "Bitte einen g\xFCltigen Bildpfad angeben."
+  template_no_image: "Kein Bild ausgew\xE4hlt"
+  template_image_not_found: Bild nicht gefunden
+  condition: Bedingung
+  cancel: Abbrechen
+  task_list: Aufgabenliste
+  add_task: "Aufgabe hinzuf\xFCgen"
+  delete_task: "Aufgabe l\xF6schen"
+  duplicate_task: Aufgabe duplizieren
+  task_id: Aufgaben-ID
+  task_name: Aufgabenname
+  task_description: Beschreibung
+  task_enabled: Aktiv
+  trigger: "Ausl\xF6ser"
+  trigger_type: "Ausl\xF6sertyp"
+  trigger_min_seconds: Minimale Sekunden
+  trigger_max_seconds: Maximale Sekunden
+  trigger_run_at_start: "Beim Start ausf\xFChren"
+  trigger_times: "Ausf\xFChrzeiten (HH:MM[,HH:MM])"
+  trigger_times_invalid: "Bitte Zeiten im Format HH:MM oder HH:MM:SS eingeben."
+  steps: Schritte
+  add_step: "Schritt hinzuf\xFCgen"
+  edit_step: Schritt bearbeiten
+  remove_step: Schritt entfernen
+  save_tasks: Aufgaben speichern
+  load_tasks: Neu laden
+  step_summary: Zusammenfassung
+  step_type: Typ
+  total_attempts: Gesamtversuche
+  total_successes: Gesamterfolge
+  task_summary: "Aufgaben\xFCbersicht"
+  task: Aufgabe
+  successes: Erfolge
+  attempts: Versuche
+  recent_actions: Letzte Aktionen
+  task_metrics: Aufgabenmetriken
+  no_metrics_configured: Keine Aufgabenmetriken konfiguriert.
+  metric_history: Metrikhistorie
+  metric_history_empty: Noch keine Metrikhistorie.
+  task_protected: "Diese Aufgabe ist gesch\xFCtzt und kann in der GUI nicht ge\xE4ndert werden."
+  add_counter: Z\xE4hler hinzuf\xFCgen
+  edit_counter: Z\xE4hler bearbeiten
+  remove_counter: Z\xE4hler entfernen
+  counter_name: Name
+  counter_label: Bezeichnung
+  counter_source: Quelle
+  counter_accumulate: Akkumulation
+  counter_unit: Einheit
+  counter_duplicate: Ein Z\xE4hler mit diesem Namen ist bereits vorhanden.
+  counter_name_required: Ein Z\xE4hlername ist erforderlich.
+  counter_editor_title: Z\xE4hler
+  counter_accumulate_sum: Summe (aufsummieren)
+  counter_accumulate_set: Setzen (aktueller Wert)
+  task_protected_hint: Diese Aufgabe ist systemrelevant. Du kannst sie bearbeiten, aber nicht löschen, um die Kompatibilität der Abläufe zu erhalten.
+  task_protected_list_hint: Aufgaben mit [SYS] sind systemrelevante Routinen und können nicht gelöscht werden.
+  metric_select_label: Metrik
+  metric_range_label: Zeitraum
+  metric_range_1h: Letzte 1 Stunde
+  metric_range_6h: Letzte 6 Stunden
+  metric_range_24h: Letzte 24 Stunden
+  metric_range_7d: Letzte 7 Tage
+  metric_range_all: Alle
+  metric_total_events: "Gesamtanzahl: {count}"
+  series_metrics: Reihen
+  add_series: Reihe hinzufügen
+  edit_series: Reihe bearbeiten
+  remove_series: Reihe entfernen
+  series_name: Name
+  series_label: Bezeichnung
+  series_source: Quelle
+  series_max_points: Max Punkte
+  series_unit: Einheit
+  series_duplicate: Eine Reihe mit diesem Namen ist bereits vorhanden.
+  series_name_required: Ein Reihenname ist erforderlich.
+  series_source_required: Eine Quellenangabe ist erforderlich.
+  series_max_points_invalid: Bitte eine gültige Zahl für Max Punkte eingeben.
+  series_editor_title: Reihe
+  recent_actions_time: Zeit
+  recent_actions_action: Aktion
+  recent_actions_result: Ergebnis
+  result: Ergebnis
+  result_ok: OK
+  result_fail: Fehler
+  result_info: Info
+  add_image_capture: Neu aufnehmen
+  replace_image_capture: Ersetzen aufnehmen
+  template_select_first_title: "Vorlage w\xE4hlen"
+  template_select_first_body: "Bitte zuerst eine Vorlage ausw\xE4hlen, bevor ein Bild\
+    \ aufgenommen wird."
+  template_capture_no_selection_title: "Kein Bild ausgew\xE4hlt"
+  template_capture_no_selection_body: "W\xE4hle ein Bild zum Ersetzen oder nutze Neu\
+    \ aufnehmen."
+  roi: "ROI (x, y, Breite, H\xF6he)"
+  threshold: Schwellenwert
+  preview: Vorschau
+  add_template: "Vorlage hinzuf\xFCgen"
+  delete_template: "Vorlage l\xF6schen"
+  save_changes: "\xC4nderungen speichern"
+  refresh_rate: Aktualisierungsrate (ms)
+  general_settings: Allgemeine Einstellungen
+  bot_enabled: Bot aktiviert
+  check_interval: "Pr\xFCfintervall (Sekunden)"
+  max_retries: Max. Wiederholungen
+  timeout: Timeout (Sekunden)
+  help_performed: Hilfe geleistet
+  gifts_collected: Geschenke geholt
+  technology_spent: Technologie gespendet
+  treasures_found: "Sch\xE4tze gefunden"
+  treasures_dug: "Sch\xE4tze gegraben"
+  total_actions: Gesamtaktionen
+  profile_label: Konfigurationsprofil
+  profile_apply: Profil setzen
+  profile_restart_hint: "Profil gespeichert. Starte den Bot neu, um es zu \xFCbernehmen."
+  profile_not_found: Profil '{name}' wurde nicht gefunden.
+  profile_invalid_selection: "Bitte ein Profil ausw\xE4hlen."
+  profile_no_change: Profil ist bereits aktiv.
+  profile_apply_error: Profilwechsel fehlgeschlagen
+  profile_none_available: Keine Konfigurationsprofile gefunden.
+setting_comments:
+  bot_title: Title displayed in the desktop GUI window.
+  language: Default GUI language ('en' or 'de').
+  tasks_file: Path to the workflow configuration file.
+  control_mode: Choose whether the bot controls an Android device via ADB or a Windows
+    window ('android' or ' windows').
+  windows_title: Exact or partial window title of the target game when using Windows
+    control.
+  device_serial: ADB device identifier; leave empty if only one device is connected.
+  threshold_default: Primary template match threshold (0.0-1.0).
+  threshold_loose: Fallback template match threshold for less strict detections.
+  template_dir: Directory containing template image files.
+  template_scale_test.enabled: Enable automatic template scale detection on first
+    run.
+  template_scale_test.scale_min: Minimum scale factor tested during auto scaling.
+  template_scale_test.scale_max: Maximum scale factor tested during auto scaling.
+  template_scale_test.scale_step: Scale increment used while probing different template
+    sizes.
+  template_scale_test.scale_template_key: Template key used as reference for scale
+    detection.
+  jitter_px: Maximum random pixel offset applied to click positions.
+  random_pause_min: Minimum pause (seconds) at the end of the main loop.
+  random_pause_max: Maximum pause (seconds) at the end of the main loop.
+  gui_enabled: Enable the GUI in additon to the console output.
+  gui_history_size: Number of detection frames stored for history navigation.
+  gui_history_only_successful: Store only successful detections in the history list.
+  gui_heatmap_alpha: Alpha transparency value for overlay heatmap rectangles.
+  gui_initial_width: Initial width of the monitor GUI window.
+  gui_initial_height: Initial height of the monitor GUI window.
+  gui_show_roi: Display configured ROIs within the monitor tab.
+  general.bot_enabled: Enable or disable the bot's automation logic.
+  general.check_interval: Seconds between successive automation checks.
+  general.max_retries: Maximum retry attempts for a failed action.
+  general.timeout: Timeout in seconds for blocking template waits.
+  monitor.refresh_rate: Monitor overlay refresh interval in milliseconds.

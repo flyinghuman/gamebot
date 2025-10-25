@@ -1,0 +1,10 @@
+logs/
+screenshots/
+*.log
+.venv/
+__pycache__/
+profiles/*
+!profiles/active_profile.txt
+!profiles/lastwar/
+!profiles/lastwar/**
+data/

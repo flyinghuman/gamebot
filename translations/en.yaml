@@ -1,0 +1,212 @@
+meta:
+  code: en
+  name: English
+strings:
+  title: Universal Game Automation Bot
+  monitor: Monitor
+  dashboard: Dashboard
+  log: Log
+  settings: Settings
+  templates: Templates
+  tasks: Tasks
+  tasks_tab: Tasks
+  rois_tab: ROIs
+  roi_list: Regions of Interest
+  roi_name: ROI Name
+  roi_coordinates: Coordinates
+  capture_roi: Capture ROI
+  roi_details: ROI Details
+  save_to_config: Save to Config
+  comment: Comment
+  pause: Pause
+  resume: Resume
+  stop: Stop
+  start: Start
+  language: Language
+  save: Save
+  load: Load
+  add: Add
+  delete: Delete
+  edit: Edit
+  browse: Browse...
+  status: Status
+  running: Running
+  paused: Paused
+  stopped: Stopped
+  statistics: Statistics
+  actions_performed: Actions Performed
+  success_rate: Success Rate
+  runtime: Runtime
+  errors: Errors
+  log_level: Log Level
+  clear_log: Clear Log
+  auto_scroll: Auto Scroll
+  config_saved: Configuration saved successfully
+  config_loaded: Configuration loaded successfully
+  error_saving: Error saving configuration
+  error_loading: Error loading configuration
+  template_name: Template Name
+  template_path: Template Path
+  template_images: Template Images
+  selected_image: Selected Image
+  add_image: Add Image
+  replace_image: Replace
+  remove_image: Remove
+  move_up: Move Up
+  move_down: Move Down
+  apply_path: Apply Path
+  template_images_count: '{count}/{max} images'
+  template_image_limit_title: Limit reached
+  template_image_limit_body: Maximum number of images per template is {max}.
+  template_image_invalid_title: Invalid Path
+  template_image_invalid_body: Please provide a valid image path.
+  template_no_image: No image selected
+  template_image_not_found: Image not found
+  condition: Condition
+  cancel: Cancel
+  task_list: Task List
+  add_task: Add Task
+  delete_task: Delete Task
+  duplicate_task: Duplicate Task
+  task_id: Task ID
+  task_name: Task Name
+  task_description: Description
+  task_enabled: Enabled
+  trigger: Trigger
+  trigger_type: Trigger Type
+  trigger_min_seconds: Min Seconds
+  trigger_max_seconds: Max Seconds
+  trigger_run_at_start: Run at Start
+  trigger_times: Run at times (HH:MM[,HH:MM])
+  trigger_times_invalid: Enter times in HH:MM or HH:MM:SS format.
+  steps: Steps
+  add_step: Add Step
+  edit_step: Edit Step
+  remove_step: Remove Step
+  save_tasks: Save Tasks
+  load_tasks: Reload
+  step_summary: Summary
+  step_type: Type
+  total_attempts: Total Attempts
+  total_successes: Total Successes
+  task_summary: Task Summary
+  task: Task
+  successes: Successes
+  attempts: Attempts
+  recent_actions: Recent Actions
+  task_metrics: Task Metrics
+  no_metrics_configured: No task metrics configured.
+  metric_history: Metric History
+  metric_history_empty: No metric history yet.
+  task_protected: This task is protected and cannot be modified from the GUI.
+  add_counter: Add Counter
+  edit_counter: Edit Counter
+  remove_counter: Remove Counter
+  counter_name: Name
+  counter_label: Label
+  counter_source: Source
+  counter_accumulate: Accumulate
+  counter_unit: Unit
+  counter_duplicate: A counter with this name already exists.
+  counter_name_required: Counter name is required.
+  counter_editor_title: Counter
+  counter_accumulate_sum: Sum (accumulate)
+  counter_accumulate_set: Set (latest value)
+  task_protected_hint: This task is required by the system. You can edit it, but deletion is disabled to keep workflows compatible.
+  task_protected_list_hint: Tasks marked [SYS] are system-required safety routines and cannot be deleted.
+  metric_select_label: Metric
+  metric_range_label: Time Range
+  metric_range_1h: Last 1 hour
+  metric_range_6h: Last 6 hours
+  metric_range_24h: Last 24 hours
+  metric_range_7d: Last 7 days
+  metric_range_all: All
+  metric_total_events: "Total events: {count}"
+  series_metrics: Series
+  add_series: Add Series
+  edit_series: Edit Series
+  remove_series: Remove Series
+  series_name: Name
+  series_label: Label
+  series_source: Source
+  series_max_points: Max Points
+  series_unit: Unit
+  series_duplicate: A series with this name already exists.
+  series_name_required: Series name is required.
+  series_source_required: Series source is required.
+  series_max_points_invalid: Enter a valid number for max points.
+  series_editor_title: Series
+  recent_actions_time: Time
+  recent_actions_action: Action
+  recent_actions_result: Result
+  result: Result
+  result_ok: OK
+  result_fail: Fail
+  result_info: Info
+  add_image_capture: Capture New
+  replace_image_capture: Capture Replace
+  template_select_first_title: Select a template
+  template_select_first_body: Please select a template before capturing an image.
+  template_capture_no_selection_title: No image selected
+  template_capture_no_selection_body: Select an image to replace or use capture new.
+  roi: ROI (x, y, width, height)
+  threshold: Threshold
+  preview: Preview
+  add_template: Add Template
+  delete_template: Delete Template
+  save_changes: Save Changes
+  refresh_rate: Refresh Rate (ms)
+  general_settings: General Settings
+  bot_enabled: Bot Enabled
+  check_interval: Check Interval (seconds)
+  max_retries: Max Retries
+  timeout: Timeout (seconds)
+  help_performed: Help Performed
+  gifts_collected: Gifts Collected
+  technology_spent: Technology Donated
+  treasures_found: Treasures Found
+  treasures_dug: Treasures Dug
+  total_actions: Total Actions
+  profile_label: Configuration Profile
+  profile_apply: Set Profile
+  profile_restart_hint: Profile saved. Restart the bot to apply.
+  profile_not_found: Profile '{name}' not found.
+  profile_invalid_selection: Select a profile.
+  profile_no_change: Profile already active.
+  profile_apply_error: Failed to switch profile
+  profile_none_available: No configuration profiles detected.
+setting_comments:
+  bot_title: Title displayed in the desktop GUI window.
+  language: Default GUI language ('en' or 'de').
+  tasks_file: Path to the workflow configuration file.
+  control_mode: Choose whether the bot controls an Android device via ADB or a Windows
+    window ('android' or ' windows').
+  windows_title: Exact or partial window title of the target game when using Windows
+    control.
+  device_serial: ADB device identifier; leave empty if only one device is connected.
+  threshold_default: Primary template match threshold (0.0-1.0).
+  threshold_loose: Fallback template match threshold for less strict detections.
+  template_dir: Directory containing template image files.
+  template_scale_test.enabled: Enable automatic template scale detection on first
+    run.
+  template_scale_test.scale_min: Minimum scale factor tested during auto scaling.
+  template_scale_test.scale_max: Maximum scale factor tested during auto scaling.
+  template_scale_test.scale_step: Scale increment used while probing different template
+    sizes.
+  template_scale_test.scale_template_key: Template key used as reference for scale
+    detection.
+  jitter_px: Maximum random pixel offset applied to click positions.
+  random_pause_min: Minimum pause (seconds) at the end of the main loop.
+  random_pause_max: Maximum pause (seconds) at the end of the main loop.
+  gui_enabled: Enable the GUI in additon to the console output.
+  gui_history_size: Number of detection frames stored for history navigation.
+  gui_history_only_successful: Store only successful detections in the history list.
+  gui_heatmap_alpha: Alpha transparency value for overlay heatmap rectangles.
+  gui_initial_width: Initial width of the monitor GUI window.
+  gui_initial_height: Initial height of the monitor GUI window.
+  gui_show_roi: Display configured ROIs within the monitor tab.
+  general.bot_enabled: Enable or disable the bot's automation logic.
+  general.check_interval: Seconds between successive automation checks.
+  general.max_retries: Maximum retry attempts for a failed action.
+  general.timeout: Timeout in seconds for blocking template waits.
+  monitor.refresh_rate: Monitor overlay refresh interval in milliseconds.

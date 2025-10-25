@@ -1,0 +1,285 @@
+bot_title:
+  value: Last War Alliance Automation Bot
+  comment: Title displayed in the desktop GUI window.
+language:
+  value: en
+  comment: Default GUI language ("en" or "de").
+control_mode:
+  value: android
+  comment: Choose whether the bot controls an Android device via ADB or a Windows
+    window (android or window).
+windows_title:
+  value: Last War-Survival Game
+  comment: Exact or partial window title of the target game when using the Windows
+    backend.
+device_serial:
+  value: emulator-5554
+  comment: ADB device identifier; leave empty if only one device is connected.
+threshold_default:
+  value: 0.85
+  comment: Primary template match threshold (0.0-1.0).
+threshold_loose:
+  value: 0.8
+  comment: Fallback template match threshold for tolerant detections.
+template_scale_test:
+  enabled:
+    value: true
+    comment: Enable automatic template scale detection on the first run.
+  scale_min:
+    value: 0.7
+    comment: Minimum scale factor tested during auto scaling.
+  scale_max:
+    value: 1.3
+    comment: Maximum scale factor tested during auto scaling.
+  scale_step:
+    value: 0.02
+    comment: Step size when probing different scales.
+  scale_template_key:
+    value: alliance_button
+    comment: Template key used as reference for scale detection.
+jitter_px:
+  value: 4
+  comment: Maximum random pixel offset applied to tap positions.
+random_pause_min:
+  value: 1
+  comment: Minimum pause (seconds) at the end of the main loop.
+random_pause_max:
+  value: 2
+  comment: Maximum pause (seconds) at the end of the main loop.
+gui_enabled:
+  value: true
+  comment: Enable the OpenCV monitor overlay instead of console output.
+gui_history_size:
+  value: 25
+  comment: Number of detection frames stored for history navigation.
+gui_history_only_successful:
+  value: true
+  comment: Store only frames with successful detections in history.
+gui_heatmap_alpha:
+  value: 0.9
+  comment: Alpha transparency for overlay heatmap rectangles.
+gui_initial_width:
+  value: 1350
+  comment: Initial width of the monitor GUI window.
+gui_initial_height:
+  value: 800
+  comment: Initial height of the monitor GUI window.
+gui_show_roi:
+  value: true
+  comment: Display configured ROIs within the monitor overlay.
+template_dir:
+  value: templates
+  comment: Directory containing template image files.
+tasks_file:
+  value: tasks.yaml
+  comment: Path to the workflow configuration file.
+rois:
+  top_right:
+  - 0.8057
+  - 0.0019
+  - 1.0
+  - 0.4185
+  bottom_right:
+  - 0.7
+  - 0.6
+  - 1.0
+  - 1.0
+  bottom_bar:
+  - 0.0771
+  - 0.7815
+  - 0.9036
+  - 0.9972
+  center_dialog:
+  - 0.299
+  - 0.0056
+  - 0.6948
+  - 0.9898
+  bottom_left:
+  - 0.0
+  - 0.8759
+  - 0.1141
+  - 0.9981
+  chat_area:
+  - 0.0068
+  - 0.1824
+  - 0.9911
+  - 0.8806
+  top_left:
+  - 0.0
+  - 0.0
+  - 0.2349
+  - 0.4815
+templates:
+  alliance_button:
+    path: templates/alliance_button.png
+    roi: bottom_right
+    use_only_roi: false
+    scales:
+    - 0.9
+    - 1.0
+    - 1.1
+  alliance_quick-help_button:
+    path:
+    - templates/alliance_quick-help_button.png
+    - templates/alliance_quick-help_button_2.png
+    roi: bottom_right
+    use_only_roi: false
+  alliance_gift_premium:
+    path: templates/alliance_gift_premium.png
+    roi: center_dialog
+    use_only_roi: false
+  alliance_gift_premium_collect:
+    path:
+    - templates/alliance_gift_premium_collect.png
+    - templates/alliance_gift_premium_collect2.png
+    - templates\alliance_gift_premium_collect3.png
+    roi: center_dialog
+    use_only_roi: false
+    threshold: 0.85
+    scales:
+    - 1.0
+  help_button:
+    path: templates/alliance_help_button.png
+    roi: center_dialog
+    use_only_roi: false
+  help_all:
+    path: templates/alliance_help-all_button.png
+    roi: center_dialog
+    use_only_roi: false
+  gift_button:
+    path: templates/alliance_gift_button.png
+    roi: center_dialog
+    use_only_roi: false
+  gift_collect_all:
+    path:
+    - templates/alliance_gift-collect-all_button.png
+    - templates\gift_collect_all.png
+    roi: center_dialog
+    use_only_roi: false
+    threshold: 0.8
+    scales:
+    - 1.0
+  technology_button:
+    path: templates/alliance_technology_button.png
+    roi: center_dialog
+    use_only_roi: false
+  technology_selected_card:
+    path: templates/technology_selected_card.png
+    roi: center_dialog
+    use_only_roi: false
+  technology_spend_active_button:
+    path: templates/technology_spend_active_button.png
+    roi: center_dialog
+    use_only_roi: false
+  technology_spend_notactive_button:
+    path: templates/technology_spend_notactive_button.png
+    roi: center_dialog
+    use_only_roi: false
+  dig_excavator_info_button:
+    path:
+    - templates/dig_excavator_info_button.png
+    - templates/dig_excavator_info_button2.png
+    - templates/dig_excavator_info_button3.png
+    roi: bottom_bar
+    use_only_roi: false
+  dig_button:
+    path:
+    - templates/dig_button.png
+    - templates/dig_button2.png
+    - templates/dig_button3.png
+    - templates/dig_button4.png
+    - templates/dig_drone1_button.png
+    - templates/dig_drone2_button.png
+    roi: center_dialog
+    use_only_roi: false
+  dig_do_dig_button:
+    path:
+    - templates/do_dig_button.png
+    - templates/do_dig_button2.png
+    - templates/do_dig_button_drone.png
+    roi: center_dialog
+    use_only_roi: false
+  dig_send_troops_button:
+    path: templates/dig_send_troops_button.png
+    roi: center_dialog
+    use_only_roi: false
+  dig_grab_gift_button:
+    path:
+    - templates/dig_grab_gift_button.png
+    - templates\dig_grab_gift_button2.png
+    - templates\dig_grab_gift_button3.png
+    roi: center_dialog
+    use_only_roi: false
+    threshold: 0.85
+    scales:
+    - 1.0
+  congrats:
+    path: templates/congrats.png
+    roi: center_dialog
+    use_only_roi: false
+  congrats_double:
+    path: templates/congrats_double.png
+    roi: center_dialog
+    use_only_roi: false
+  close_x:
+    path:
+    - templates/close_x.png
+    - templates\alliance_help-close_button.png
+    roi: center_dialog
+    use_only_roi: false
+    threshold: 0.85
+    scales:
+    - 1.0
+  back_arrow:
+    path:
+    - templates/back_arrow2.png
+    - templates\alliance_back_button.png
+    roi: bottom_left
+    use_only_roi: false
+    threshold: 0.85
+    scales:
+    - 1.0
+  other_device_hint:
+    path: templates/other_device_hint.png
+    roi: center_dialog
+    use_only_roi: false
+  other_device_hint_acknowledge:
+    path: templates/other_device_hint_acknowledge.png
+    roi: center_dialog
+    use_only_roi: false
+  app_icon:
+    path: templates/app_icon.png
+    roi: center_dialog
+    use_only_roi: false
+  dig_share_info_message:
+    path:
+    - templates/dig_share_info_message.png
+    - templates\dig_share_info_message2.png
+    - templates\dig_share_info_message3.png
+    roi: chat_area
+    use_only_roi: false
+    threshold: 0.85
+    scales:
+    - 1.0
+  exit_game:
+    path:
+    - templates/exit_game.png
+    roi: center_dialog
+    use_only_roi: false
+    threshold: 0.85
+    scales:
+    - 1.0
+  server_connection_lost:
+    path: templates\server_connection_lost.png
+    roi: center_dialog
+    use_only_roi: false
+    threshold: 0.85
+    scales:
+    - 1.0
+  server_connection_lost_acknowledge:
+    path: templates\server_connection_lost_acknowledge.png
+    roi: center_dialog
+    use_only_roi: false
+    threshold: 0.85
+    scales:
+    - 1.0

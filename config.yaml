@@ -1,0 +1,73 @@
+bot_title:
+    value: Universal Game Automation Bot
+    comment: Title displayed in the desktop GUI window.
+language:
+    value: en
+    comment: Default GUI language ("en" or "de").
+control_mode:
+    value: android
+    comment: Choose whether the bot controls an Android device via ADB or a Windows window.
+windows_title:
+    value: Game Window Title
+    comment: Exact or partial window title of the target game when using the Windows backend.
+device_serial:
+    value: emulator-5554
+    comment: ADB device identifier; maybe leave empty if only one device is connected.
+threshold_default:
+    value: 0.85
+    comment: Primary template match threshold (0.0-1.0).
+threshold_loose:
+    value: 0.8
+    comment: Fallback template match threshold for tolerant detections.
+template_scale_test:
+    enabled:
+        value: true
+        comment: Enable automatic template scale detection on the first run.
+    scale_min:
+        value: 0.7
+        comment: Minimum scale factor tested during auto scaling.
+    scale_max:
+        value: 1.3
+        comment: Maximum scale factor tested during auto scaling.
+    scale_step:
+        value: 0.02
+        comment: Step size when probing different scales.
+    scale_template_key:
+        value: alliance_button
+        comment: Template key used as reference for scale detection.
+jitter_px:
+    value: 4
+    comment: Maximum random pixel offset applied to tap positions.
+random_pause_min:
+    value: 1
+    comment: Minimum pause (seconds) at the end of the main loop.
+random_pause_max:
+    value: 2
+    comment: Maximum pause (seconds) at the end of the main loop.
+gui_enabled:
+    value: true
+    comment: Enable the OpenCV monitor overlay instead of console output.
+gui_history_size:
+    value: 25
+    comment: Number of detection frames stored for history navigation.
+gui_history_only_successful:
+    value: true
+    comment: Store only frames with successful detections in history.
+gui_heatmap_alpha:
+    value: 0.9
+    comment: Alpha transparency for overlay heatmap rectangles.
+gui_initial_width:
+    value: 1350
+    comment: Initial width of the monitor GUI window.
+gui_initial_height:
+    value: 800
+    comment: Initial height of the monitor GUI window.
+gui_show_roi:
+    value: true
+    comment: Display configured ROIs within the monitor overlay.
+template_dir:
+    value: templates
+    comment: Directory containing template image files.
+tasks_file:
+    value: tasks.yaml
+    comment: Path to the workflow configuration file.

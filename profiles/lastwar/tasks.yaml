@@ -1,0 +1,543 @@
+version: 1
+tasks:
+- id: close_any_windows
+  name: Close Open Dialogs
+  description: ''
+  enabled: false
+  protected-system-task: true
+  trigger:
+    type: interval
+    min_seconds: 3600
+    max_seconds: 3600
+  steps:
+  - type: loop
+    max_iterations: 3
+    steps:
+    - type: tap_template
+      template: close_x
+      threshold: '{{config.threshold_loose}}'
+      required: false
+      stop_on_fail: false
+    - type: tap_template
+      template: back_arrow
+      threshold: '{{config.threshold_loose}}'
+      required: false
+      stop_on_fail: false
+    - type: sleep
+      seconds: 1
+    - type: if
+      condition:
+        type: template
+        template: alliance_button
+      then_steps:
+      - type: set_success
+        value: true
+      - type: set_detail
+        text: Home screen restored.
+      - type: stop_task
+        success: true
+  - type: set_success
+    value: false
+  - type: set_detail
+    text: Dialogs remain open.
+- id: stabilize_home
+  name: Stabilize Home
+  description: ''
+  enabled: false
+  protected-system-task: true
+  trigger:
+    type: interval
+    min_seconds: 3600
+    max_seconds: 3600
+  steps:
+  - type: loop
+    max_iterations: 3
+    steps:
+    - type: if
+      condition:
+        type: template
+        template: alliance_button
+      then_steps:
+      - type: set_success
+        value: true
+      - type: set_detail
+        text: Home screen verified.
+      - type: stop_task
+        success: true
+    - type: call_task
+      task_id: close_any_windows
+      propagate_success: false
+      stop_on_fail: false
+    - type: press_back
+      sleep_after: 1
+    - type: if
+      condition:
+        type: template
+        template: exit_game
+      then_steps:
+      - type: press_back
+        sleep_after: 1
+  - type: set_success
+    value: false
+  - type: set_detail
+    text: Unable to stabilize home view.
+- id: handle_other_device
+  name: handle_other_device
+  description: ''
+  enabled: false
+  protected-system-task: true
+  trigger:
+    type: interval
+    min_seconds: 30
+    max_seconds: 60
+  steps:
+  - type: if
+    condition:
+      type: template
+      template: other_device_hint
+    then_steps:
+    - type: log_message
+      level: warning
+      message: '''Another device detected'' hint found. Pausing automation.'
+    - type: tap_template
+      template: other_device_hint_acknowledge
+      threshold: '{{config.threshold_loose}}'
+      required: false
+      stop_on_fail: false
+    - type: sleep
+      seconds: 1800
+    - type: tap_template
+      template: app_icon
+      threshold: '{{config.threshold_loose}}'
+      required: false
+      stop_on_fail: false
+    - type: sleep
+      seconds: 30
+    - type: if
+      condition:
+        type: template
+        template: app_icon
+      then_steps:
+      - type: log_message
+        level: error
+        message: Unable to relaunch the app. Retrying once more.
+      - type: wait_tap_template
+        template: app_icon
+        threshold: '{{config.threshold_loose}}'
+        timeout: 10
+        required: false
+        stop_on_fail: false
+      - type: sleep
+        seconds: 30
+  - type: set_success
+    value: true
+- id: handle__server_connection_lost
+  name: Handle Server Connection lost
+  description: ''
+  enabled: false
+  protected-system-task: true
+  trigger:
+    type: interval
+    min_seconds: 30
+    max_seconds: 60
+    run_at_start: true
+  steps:
+  - type: if
+    condition:
+      type: template
+      template: server_connection_lost
+    then_steps:
+    - type: log_message
+      level: warning
+      message: '''Server Connection Lost'' hint found. Try to restart Game after Pause
+        30 Minutes.'
+    - type: tap_template
+      template: server_connection_lost_acknowledge
+      threshold: '{{config.threshold_loose}}'
+      use_roi: true
+      required: false
+      stop_on_fail: false
+      success_steps: []
+      failure_steps: []
+    - type: sleep
+      seconds: '1800'
+    - type: tap_template
+      template: app_icon
+      threshold: '{{config.threshold_loose}}'
+      required: false
+      stop_on_fail: false
+    - type: sleep
+      seconds: 30
+    - type: if
+      condition:
+        type: template
+        template: app_icon
+      then_steps:
+      - type: log_message
+        level: error
+        message: Unable to relaunch the app. Retrying once more.
+      - type: wait_tap_template
+        template: app_icon
+        threshold: '{{config.threshold_loose}}'
+        timeout: 10
+        required: false
+        stop_on_fail: false
+      - type: sleep
+        seconds: 30
+    else_steps: []
+  - type: set_success
+    value: true
+- id: preflight_guard
+  name: preflight_guard
+  description: Ensures that the Game is in Home Screen for new loop.
+  enabled: false
+  protected-system-task: true
+  trigger:
+    type: interval
+    min_seconds: 30
+    max_seconds: 60
+  steps:
+  - type: call_task
+    task_id: handle_other_device
+    propagate_success: false
+    stop_on_fail: false
+  - type: call_task
+    task_id: handle__server_connection_lost
+    propagate_success: false
+    stop_on_fail: false
+  - type: if
+    condition:
+      type: template
+      template: alliance_button
+      use_roi: true
+      threshold: '0.95'
+    then_steps:
+    - type: set_success
+      value: true
+    - type: stop_task
+      success: true
+    else_steps: []
+  - type: call_task
+    task_id: stabilize_home
+    propagate_success: true
+    stop_on_fail: false
+  - type: sleep
+    min: '1'
+    max: '2'
+- id: treasure_dig
+  name: Treasure Hunt
+  description: Join shared treasure hunts when new dig messages appear.
+  enabled: true
+  trigger:
+    type: interval
+    min_seconds: 5
+    max_seconds: 10
+    run_at_start: true
+  steps:
+  - type: tap_template
+    template: dig_excavator_info_button
+    threshold: '{{config.threshold_loose}}'
+    success_detail: Opened treasure view.
+    fail_detail: Treasure button not found.
+  - type: sleep
+    min: 1
+    max: 2
+  - type: tap_template
+    template: dig_share_info_message
+    threshold: '{{config.threshold_loose}}'
+    required: false
+    stop_on_fail: false
+    success_steps:
+    - type: set_flag
+      name: dig_msg_found
+      value: true
+    - type: set_flag
+      name: dig_treasure_detected
+      value: 1
+    - type: set_flag
+      name: series.dig_treasure_detected
+      value: 1
+  - type: if
+    condition:
+      type: flag
+      flag: dig_msg_found
+      value: true
+    then_steps:
+    - type: wait_tap_template
+      template: dig_button
+      threshold: '{{config.threshold_loose}}'
+      timeout: 10
+      success_detail: Joined treasure dig.
+      fail_detail: Dig button missing.
+    - type: sleep
+      min: 1
+      max: 2
+    - type: wait_tap_template
+      template: dig_do_dig_button
+      threshold: '{{config.threshold_loose}}'
+      timeout: 5
+      success_detail: Confirmed dig.
+      fail_detail: Do-dig button missing.
+    - type: sleep
+      min: 1
+      max: 2
+    - type: wait_tap_template
+      template: dig_send_troops_button
+      threshold: '{{config.threshold_loose}}'
+      timeout: 5
+      success_detail: Troops sent.
+      fail_detail: Send troops button missing.
+    - type: set_flag
+      name: dig_treasure_dug
+      value: 1
+    - type: set_flag
+      name: series.dig_treasure_dug
+      value: 1
+    - type: sleep
+      min: 1
+      max: 2
+    - type: wait_tap_template
+      template: dig_grab_gift_button
+      threshold: '{{config.threshold_loose}}'
+      timeout: 300
+      sleep_interval: 0.25
+      success_detail: Treasure reward collected.
+      fail_detail: Grab-gift button missing.
+    - type: set_flag
+      name: dig_reward_collected
+      value: 1
+    - type: set_flag
+      name: series.dig_reward_collected
+      value: 1
+    - type: sleep
+      min: 2
+      max: 4
+    - type: wait_tap_template
+      template: congrats
+      threshold: '{{config.threshold_loose}}'
+      timeout: 5
+      required: false
+      stop_on_fail: false
+    else_steps:
+    - type: set_success
+      value: false
+    - type: set_detail
+      text: No treasure message discovered.
+  - type: call_task
+    task_id: close_any_windows
+    propagate_success: false
+    stop_on_fail: false
+  stats:
+    counters:
+      treasures_recognized:
+        label: Treasures Recognized
+        source: context.dig_treasure_detected
+        accumulate: sum
+      treasures_dug:
+        label: Treasures Dug
+        source: context.dig_treasure_dug
+        accumulate: sum
+      treasure_rewards:
+        label: Treasure Rewards Collected
+        source: context.dig_reward_collected
+        accumulate: sum
+    series:
+      treasures_recognized_timeline:
+        label: Treasures Recognized Timeline
+        source: series.dig_treasure_detected
+        max_points: 500
+      treasures_dug_timeline:
+        label: Treasures Dug Timeline
+        source: series.dig_treasure_dug
+        max_points: 500
+      treasure_rewards_timeline:
+        label: Treasure Rewards Timeline
+        source: series.dig_reward_collected
+        max_points: 500
+- id: alliance_help
+  name: Alliance Help
+  description: Provide alliance help whenever the quick-help button is visible.
+  enabled: true
+  trigger:
+    type: interval
+    min_seconds: 1
+    max_seconds: 2
+    run_at_start: true
+  steps:
+  - type: tap_template
+    template: alliance_quick-help_button
+    threshold: '{{config.threshold_loose}}'
+    required: true
+    stop_on_fail: false
+    success_detail: Alliance help delivered.
+    fail_detail: No alliance help required.
+  stats:
+    counters:
+      alliance_help_success:
+        label: Alliance Help Successes
+        source: result.success
+        accumulate: sum
+    series:
+      alliance_help_timeline:
+        label: Alliance Help Timeline
+        source: result.success
+        max_points: 500
+- id: alliance_gifts
+  name: Collect Gifts
+  description: Open alliance screen and collect available gifts.
+  enabled: true
+  trigger:
+    type: interval
+    min_seconds: 1600
+    max_seconds: 1800
+    run_at_start: true
+  steps:
+  - type: tap_template
+    template: alliance_button
+    threshold: '{{config.threshold_loose}}'
+    success_detail: Alliance menu opened.
+    fail_detail: Alliance button not found.
+  - type: sleep
+    min: 1
+    max: 2
+  - type: tap_template
+    template: gift_button
+    threshold: '{{config.threshold_loose}}'
+    success_detail: Gift screen opened.
+    fail_detail: Gift button not found.
+  - type: sleep
+    min: 1
+    max: 2
+  - type: tap_template
+    template: gift_collect_all
+    threshold: '{{config.threshold_loose}}'
+    required: false
+    stop_on_fail: false
+    success_detail: Collected standard gifts.
+    fail_detail: No standard gifts to collect.
+  - type: sleep
+    min: 1
+    max: 2
+  - type: wait_tap_template
+    template: congrats
+    threshold: '{{config.threshold_loose}}'
+    timeout: 2
+    required: false
+    stop_on_fail: false
+  - type: if
+    condition:
+      type: template
+      template: alliance_gift_premium
+    then_steps:
+    - type: tap_template
+      template: alliance_gift_premium
+      threshold: '{{config.threshold_loose}}'
+      required: false
+      stop_on_fail: false
+    - type: sleep
+      min: 1
+      max: 2
+    - type: if
+      condition:
+        type: template
+        template: gift_collect_all
+      then_steps:
+      - type: tap_template
+        template: gift_collect_all
+        threshold: '{{config.threshold_loose}}'
+        required: false
+        stop_on_fail: false
+        success_detail: Collected premium gifts.
+      else_steps:
+      - type: loop
+        condition:
+          type: template
+          template: alliance_gift_premium_collect
+          use_roi: true
+        max_iterations: '10'
+        break_on_fail: true
+        steps:
+        - type: tap_template
+          template: alliance_gift_premium_collect
+          threshold: '{{config.threshold_loose}}'
+          required: false
+          stop_on_fail: false
+          success_detail: Collected one premium gift.
+        - type: sleep
+          min: 1
+          max: 2
+    else_steps: []
+  - type: call_task
+    task_id: close_any_windows
+    propagate_success: false
+    stop_on_fail: false
+  stats:
+    counters:
+      alliance_gifts_success:
+        label: Alliance Gifts Collected
+        source: result.success
+        accumulate: sum
+    series:
+      alliance_gifts_timeline:
+        label: Alliance Gifts Timeline
+        source: result.success
+        max_points: 10000
+- id: alliance_technology
+  name: Donate Tech
+  description: Attempt to donate to the active alliance technology project.
+  enabled: true
+  trigger:
+    type: interval
+    min_seconds: 1600
+    max_seconds: 1800
+    run_at_start: true
+  steps:
+  - type: tap_template
+    template: alliance_button
+    threshold: '{{config.threshold_loose}}'
+    success_detail: Alliance menu opened.
+    fail_detail: Alliance button not found.
+  - type: sleep
+    min: 1
+    max: 2
+  - type: tap_template
+    template: technology_button
+    threshold: '{{config.threshold_loose}}'
+    success_detail: Technology view opened.
+    fail_detail: Technology button not found.
+  - type: sleep
+    min: 1
+    max: 2
+  - type: tap_template
+    template: technology_selected_card
+    threshold: '{{config.threshold_loose}}'
+    success_detail: Technology card selected.
+    fail_detail: Technology card not found.
+  - type: sleep
+    min: 1
+    max: 2
+  - type: wait_tap_template
+    template: technology_spend_active_button
+    threshold: '{{config.threshold_loose}}'
+    timeout: 3
+    duration_ms: 3000
+    success_detail: Technology donation triggered.
+    fail_detail: No active technology donation available.
+  - type: sleep
+    min: 2
+    max: 3
+  - type: call_task
+    task_id: close_any_windows
+    propagate_success: false
+    stop_on_fail: false
+  stats:
+    counters:
+      alliance_technology_success:
+        label: Alliance Technology Donations
+        source: result.success
+        accumulate: sum
+    series:
+      alliance_technology_timeline:
+        label: Alliance Technology Timeline
+        source: result.success
+        max_points: 500
