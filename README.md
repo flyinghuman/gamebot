@@ -140,8 +140,10 @@ Please read the docs for platform-specific setup steps and the Tasks how-to.
 If you find this project useful and want to support continued development, please consider making a small donation to the developer. There is no required donation — but contributions help with maintenance and improvements.
 
 Thank you for supporting the project!
+```text
 BTC: bc1qydkjt2gfxr7uz4pt4jldpzwxqty8nc76vtv9ss
 ETH: 0x5D0F170eBc8caC2db4F9477E26A4858142abDEEB
 XRP: rUvTGRaqg9Q7DTJoMRGRVBZ1fpKaZQcx5a
 DOGE: DRPr2oh2ynd4FJ66BrPFfskE1jpEWWnBpm
 DASH: Xnzed2r417hGfgLG4DqCCTSNPci6FbvgHW
+```

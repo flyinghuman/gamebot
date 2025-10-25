@@ -162,8 +162,10 @@ Vereinfachter Ablauf:
 
 ---
 Wenn du möchtest, unterstütze die Weiterentwicklung des Projekts mit einer kleinen Spende an den Entwickler. Danke!
+```text
 BTC: bc1qydkjt2gfxr7uz4pt4jldpzwxqty8nc76vtv9ss
 ETH: 0x5D0F170eBc8caC2db4F9477E26A4858142abDEEB
 XRP: rUvTGRaqg9Q7DTJoMRGRVBZ1fpKaZQcx5a
 DOGE: DRPr2oh2ynd4FJ66BrPFfskE1jpEWWnBpm
 DASH: Xnzed2r417hGfgLG4DqCCTSNPci6FbvgHW
+```
