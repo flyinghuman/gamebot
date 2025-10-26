@@ -39,7 +39,7 @@ cd gamebot
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python3 bot.py # Start the Bot
+python3 bot.py # Start the Bot or run start-bot.bat
 ```
 
 1. Edit `profiles/my-game/config.yaml` to match your device backend, thresholds, ROIs, and other preferences.

@@ -7,8 +7,8 @@ set "CONFIG=config.yaml"
 set "PYTHON=python"
 
 rem Falls venv existiert, diese Python-Exe nehmen
-if exist "..\.venv\Scripts\python.exe" (
-  set "PYTHON=..\.venv\Scripts\python.exe"
+if exist ".venv\Scripts\python.exe" (
+  set "PYTHON=.venv\Scripts\python.exe"
 )
 
 echo [INFO] Verwende Python: %PYTHON%
@@ -18,6 +18,7 @@ echo.
 rem 1) run.py bevorzugen
 if exist "bot.py" (
   echo [INFO] Starte: %PYTHON% bot.py --config "%CONFIG%"
+  ".venv\Scripts\activate"
   "%PYTHON%" "bot.py" --config "%CONFIG%"
   goto :end
 )
