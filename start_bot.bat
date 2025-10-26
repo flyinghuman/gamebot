@@ -30,6 +30,7 @@ echo [INFO] Starte: %PYTHON% -m bot --config "%CONFIG%"
 echo.
 if errorlevel 1 (
   echo [FEHLER] Bot konnte nicht gestartet werden. Bitte Pfade/Abhaengigkeiten pruefen.
+  pause
 ) else (
   echo [OK] Bot beendet.
 )

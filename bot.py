@@ -6757,14 +6757,25 @@ class GUIController:
         if self._is_point_in_rect(x, y, self.buttons["prev"]["rect"]):
             # Pause the bot to lock the selection
             if not is_paused:
-                is_paused = True
-                LOGGER.warning("Bot paused via GUi Interaction.")
+                _apply_pause_state(True)
+                # Also push immediate GUI update (defensive: ensure GUI sees the change)
+                try:
+                    if GUI_ENABLED and gui:
+                        gui.set_paused(True)
+                except Exception:
+                    pass
+                LOGGER.warning("Bot paused via GUI Interaction.")
             self.step_mode_active = True
             self.history_view_index = max(0, self.history_view_index - 1)
         elif self._is_point_in_rect(x, y, self.buttons["next"]["rect"]):
             if not is_paused:
-                is_paused = True
-                LOGGER.warning("Bot paused via GUi Interaction.")
+                _apply_pause_state(True)
+                try:
+                    if GUI_ENABLED and gui:
+                        gui.set_paused(True)
+                except Exception:
+                    pass
+                LOGGER.warning("Bot paused via GUI Interaction.")
             self.step_mode_active = True
             self.history_view_index = min(
                 len(self.detection_history) - 1, self.history_view_index + 1
@@ -6784,7 +6795,12 @@ class GUIController:
                 self.step_mode_active = True
                 # Pause the bot to lock the selection
                 if not is_paused:
-                    is_paused = True
+                    _apply_pause_state(True)
+                    try:
+                        if GUI_ENABLED and gui:
+                            gui.set_paused(True)
+                    except Exception:
+                        pass
                     LOGGER.warning("Bot paused via history selection.")
 
                 LOGGER.info(
@@ -7168,6 +7184,58 @@ def application_has_focus() -> bool:
     return False
 
 
+# --- Pause synchronization helper ---
+def _apply_pause_state(paused: bool) -> bool:
+    """
+    Update the global pause flag and synchronize UI/monitor state.
+
+    Returns the previous pause value so callers can detect transitions.
+    """
+    global is_paused, gui, gui_controller
+
+    previous = is_paused
+    is_paused = bool(paused)
+
+    if GUI_ENABLED and gui:
+        try:
+            gui.set_paused(is_paused)
+        except Exception:
+            pass
+
+    if not is_paused and gui_controller:
+        gui_controller.step_mode_active = False
+        gui_controller.history_view_index = -1
+        # Force an immediate live render so the Monitor tab stops showing the
+        # previously selected history frame when resuming. Also push the frame
+        # directly into the Tk Monitor tab (gui.update_image) so the GUI shows
+        # the live screen even when the controller uses the OpenCV backend.
+        try:
+            if GUI_ENABLED and gui_controller:
+                try:
+                    screen = screenshot_bgr()
+                    # Use current detections if available, fallback to empty list
+                    gui_controller.render(screen, detections_this_frame)
+                except Exception:
+                    try:
+                        screen = screenshot_bgr()
+                        gui_controller.render(screen, [])
+                    except Exception:
+                        screen = None
+
+                # Also update the Tk Monitor tab directly, if GUI is running
+                try:
+                    if gui is not None and getattr(gui, "running", False) and screen is not None:
+                        rgb = cv2.cvtColor(screen, cv2.COLOR_BGR2RGB)
+                        img_pil = Image.fromarray(rgb)
+                        gui.update_image(img_pil)
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
+    return previous
+
+
 # --- Pause toggle (keyboard & GUI) ---
 def toggle_pause(e=None):
     """
@@ -7177,12 +7245,10 @@ def toggle_pause(e=None):
     global is_paused, gui_controller
     # Ignore key events that are not the 'p' hotkey
     if e is None or e.name == "p":
-        is_paused = not is_paused
-        # Reset step mode whenever the bot resumes
-        if not is_paused and gui_controller:
-            gui_controller.step_mode_active = False
+        new_state = not is_paused
+        _apply_pause_state(new_state)
 
-        if is_paused:
+        if new_state:
             LOGGER.warning("Bot paused. Press 'P' or use the GUI button to resume.")
             if gui_controller and len(gui_controller.detection_history) > 0:
                 # Keep the current index in step mode; otherwise jump to the latest entry
@@ -7986,9 +8052,6 @@ def main():
             if not application_has_focus():
                 return
             toggle_pause(e)
-            if GUI_ENABLED and gui:
-                gui.set_paused(is_paused)
-                return
         except Exception:
             pass
 
@@ -8018,19 +8081,11 @@ def main():
                         bot_is_running = False
                         break
                     elif cmd_type == "pause":
-                        is_paused = True
+                        _apply_pause_state(True)
                         gui.log_message("Bot paused by user", "WARNING")
-                        try:
-                            gui.set_paused(True)
-                        except Exception:
-                            pass
                     elif cmd_type == "resume":
-                        is_paused = False
+                        _apply_pause_state(False)
                         gui.log_message("Bot resumed by user", "INFO")
-                        try:
-                            gui.set_paused(False)
-                        except Exception:
-                            pass
 
                 # Update stats from global Stats instance
                 try:
@@ -8157,8 +8212,18 @@ def main():
             # Wartezeit am Ende der Schleife
             LOGGER.info("Pausing before the next cycle...")
             # Letztes Bild rendern vor der Pause
+            # Render the live screen with the collected detections so that when
+            # the bot resumes the Monitor shows current detections instead of an
+            # empty/old frame.
             if GUI_ENABLED and gui_controller and not is_paused:
-                gui_controller.render(screenshot_bgr(), [])
+                try:
+                    gui_controller.render(screenshot_bgr(), detections_this_frame)
+                except Exception:
+                    # Fallback to empty list if something goes wrong
+                    try:
+                        gui_controller.render(screenshot_bgr(), [])
+                    except Exception:
+                        pass
             time.sleep(random.uniform(PAUSE_MIN, PAUSE_MAX))
 
     except KeyboardInterrupt:
