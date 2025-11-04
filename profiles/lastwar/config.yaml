@@ -258,7 +258,7 @@ templates:
     - templates\dig_share_info_message3.png
     roi: chat_area
     use_only_roi: false
-    threshold: 0.85
+    threshold: 0.7
     scales:
     - 1.0
   exit_game:
