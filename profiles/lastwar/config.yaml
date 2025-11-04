@@ -283,3 +283,10 @@ templates:
     threshold: 0.85
     scales:
     - 1.0
+  technology_spend_diamant_button:
+    path: templates\technology_spend_diamant_button.png
+    roi: center_dialog
+    use_only_roi: false
+    threshold: 0.85
+    scales:
+    - 1.0

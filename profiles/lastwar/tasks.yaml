@@ -4,7 +4,6 @@ tasks:
   name: Close Open Dialogs
   description: ''
   enabled: false
-  protected-system-task: true
   trigger:
     type: interval
     min_seconds: 3600
@@ -40,11 +39,11 @@ tasks:
     value: false
   - type: set_detail
     text: Dialogs remain open.
+  protected-system-task: true
 - id: stabilize_home
   name: Stabilize Home
   description: ''
   enabled: false
-  protected-system-task: true
   trigger:
     type: interval
     min_seconds: 3600
@@ -81,11 +80,11 @@ tasks:
     value: false
   - type: set_detail
     text: Unable to stabilize home view.
+  protected-system-task: true
 - id: handle_other_device
   name: handle_other_device
   description: ''
   enabled: false
-  protected-system-task: true
   trigger:
     type: interval
     min_seconds: 30
@@ -131,11 +130,11 @@ tasks:
         seconds: 30
   - type: set_success
     value: true
+  protected-system-task: true
 - id: handle__server_connection_lost
   name: Handle Server Connection lost
   description: ''
   enabled: false
-  protected-system-task: true
   trigger:
     type: interval
     min_seconds: 30
@@ -187,15 +186,15 @@ tasks:
     else_steps: []
   - type: set_success
     value: true
+  protected-system-task: true
 - id: preflight_guard
   name: preflight_guard
   description: Ensures that the Game is in Home Screen for new loop.
   enabled: false
-  protected-system-task: true
   trigger:
     type: interval
-    min_seconds: 30
-    max_seconds: 60
+    min_seconds: 1
+    max_seconds: 1
   steps:
   - type: call_task
     task_id: handle_other_device
@@ -224,6 +223,7 @@ tasks:
   - type: sleep
     min: '1'
     max: '2'
+  protected-system-task: true
 - id: treasure_dig
   name: Treasure Hunt
   description: Join shared treasure hunts when new dig messages appear.
@@ -242,9 +242,12 @@ tasks:
   - type: sleep
     min: 1
     max: 2
-  - type: tap_template
+  - type: wait_tap_template
     template: dig_share_info_message
     threshold: '{{config.threshold_loose}}'
+    use_roi: true
+    timeout: '5'
+    sleep_interval: '1'
     required: false
     stop_on_fail: false
     success_steps:
@@ -257,6 +260,7 @@ tasks:
     - type: set_flag
       name: series.dig_treasure_detected
       value: 1
+    failure_steps: []
   - type: if
     condition:
       type: flag
@@ -299,10 +303,15 @@ tasks:
     - type: wait_tap_template
       template: dig_grab_gift_button
       threshold: '{{config.threshold_loose}}'
-      timeout: 300
-      sleep_interval: 0.25
+      use_roi: true
+      timeout: '500'
+      sleep_interval: '0.25'
       success_detail: Treasure reward collected.
       fail_detail: Grab-gift button missing.
+      required: false
+      stop_on_fail: false
+      success_steps: []
+      failure_steps: []
     - type: set_flag
       name: dig_reward_collected
       value: 1
@@ -516,6 +525,19 @@ tasks:
   - type: sleep
     min: 1
     max: 2
+  - type: tap_template
+    template: technology_spend_diamant_button
+    threshold: '0.85'
+    use_roi: true
+    required: true
+    stop_on_fail: true
+    success_detail: Technologie Dias gespendet.
+    fail_detail: Fehler bei Tech-Dia spende.
+    success_steps: []
+    failure_steps: []
+  - type: sleep
+    min: 2
+    max: 3
   - type: wait_tap_template
     template: technology_spend_active_button
     threshold: '{{config.threshold_loose}}'
@@ -524,8 +546,9 @@ tasks:
     success_detail: Technology donation triggered.
     fail_detail: No active technology donation available.
   - type: sleep
-    min: 2
-    max: 3
+    seconds: '2'
+    min: '2'
+    max: '3'
   - type: call_task
     task_id: close_any_windows
     propagate_success: false
