@@ -1933,8 +1933,13 @@ class TaskStepDialog:
                     else []
                 )
                 var = {"value": steps_value}
+                summary_var = tk.StringVar(
+                    value=self._format_steps_summary(var["value"])
+                )
 
-                def open_steps_editor(var=var, spec=spec):
+                def open_steps_editor(
+                    var=var, spec=spec, summary_var=summary_var
+                ):
                     editor = StepsEditorDialog(
                         self.top,
                         self.gui_manager,
@@ -1947,9 +1952,6 @@ class TaskStepDialog:
                         var["value"] = result
                         summary_var.set(self._format_steps_summary(var["value"]))
 
-                summary_var = tk.StringVar(
-                    value=self._format_steps_summary(var["value"])
-                )
                 button = ttk.Button(
                     self.fields_frame,
                     text=f"{self.gui_manager.t('edit')}...",

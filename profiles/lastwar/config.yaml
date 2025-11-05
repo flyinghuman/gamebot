@@ -50,7 +50,7 @@ gui_enabled:
   value: true
   comment: Enable the OpenCV monitor overlay instead of console output.
 gui_history_size:
-  value: 25
+  value: 30
   comment: Number of detection frames stored for history navigation.
 gui_history_only_successful:
   value: true
@@ -258,7 +258,7 @@ templates:
     - templates\dig_share_info_message3.png
     roi: chat_area
     use_only_roi: false
-    threshold: 0.7
+    threshold: 0.85
     scales:
     - 1.0
   exit_game:
