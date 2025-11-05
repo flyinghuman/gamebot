@@ -1571,7 +1571,16 @@ class DashboardTab(ttk.Frame):
 
     def update_stats(self, stats_data):
         """Update statistics display using live global stats."""
-        total_actions = int(stats_data.get("total_actions", 0))
+        raw_actions = stats_data.get("total_actions")
+        if raw_actions is None:
+            raw_actions = stats_data.get("total_successes", 0)
+        try:
+            total_actions = int(raw_actions)
+        except (TypeError, ValueError):
+            try:
+                total_actions = int(float(raw_actions))
+            except (TypeError, ValueError):
+                total_actions = 0
         uptime = int(stats_data.get("uptime_secs", 0))
 
         self.actions_label.configure(text=str(total_actions))
