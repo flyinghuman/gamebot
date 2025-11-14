@@ -50,7 +50,7 @@ gui_enabled:
   value: true
   comment: Enable the OpenCV monitor overlay instead of console output.
 gui_history_size:
-  value: 30
+  value: 70
   comment: Number of detection frames stored for history navigation.
 gui_history_only_successful:
   value: true
@@ -113,7 +113,8 @@ templates:
   alliance_button:
     path: templates/alliance_button.png
     roi: bottom_right
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
     scales:
     - 0.9
     - 1.0
@@ -123,65 +124,95 @@ templates:
     - templates/alliance_quick-help_button.png
     - templates/alliance_quick-help_button_2.png
     roi: bottom_right
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   alliance_gift_premium:
     path: templates/alliance_gift_premium.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   alliance_gift_premium_collect:
     path:
     - templates/alliance_gift_premium_collect.png
     - templates/alliance_gift_premium_collect2.png
     - templates\alliance_gift_premium_collect3.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
     threshold: 0.85
     scales:
     - 1.0
   help_button:
     path: templates/alliance_help_button.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   help_all:
     path: templates/alliance_help-all_button.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   gift_button:
     path: templates/alliance_gift_button.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   gift_collect_all:
     path:
     - templates/alliance_gift-collect-all_button.png
     - templates\gift_collect_all.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
     threshold: 0.8
     scales:
     - 1.0
   technology_button:
     path: templates/alliance_technology_button.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   technology_selected_card:
     path: templates/technology_selected_card.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   technology_spend_active_button:
     path: templates/technology_spend_active_button.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   technology_spend_notactive_button:
     path: templates/technology_spend_notactive_button.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   dig_excavator_info_button:
     path:
     - templates/dig_excavator_info_button.png
     - templates/dig_excavator_info_button2.png
     - templates/dig_excavator_info_button3.png
     roi: bottom_bar
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   dig_button:
     path:
     - templates/dig_button.png
@@ -191,42 +222,57 @@ templates:
     - templates/dig_drone1_button.png
     - templates/dig_drone2_button.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   dig_do_dig_button:
     path:
     - templates/do_dig_button.png
     - templates/do_dig_button2.png
     - templates/do_dig_button_drone.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   dig_send_troops_button:
     path: templates/dig_send_troops_button.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   dig_grab_gift_button:
     path:
     - templates/dig_grab_gift_button.png
     - templates\dig_grab_gift_button2.png
     - templates\dig_grab_gift_button3.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
     threshold: 0.85
     scales:
     - 1.0
   congrats:
     path: templates/congrats.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   congrats_double:
     path: templates/congrats_double.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   close_x:
     path:
     - templates/close_x.png
     - templates\alliance_help-close_button.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
     threshold: 0.85
     scales:
     - 1.0
@@ -242,11 +288,17 @@ templates:
   other_device_hint:
     path: templates/other_device_hint.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   other_device_hint_acknowledge:
     path: templates/other_device_hint_acknowledge.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   app_icon:
     path: templates/app_icon.png
     roi: center_dialog
@@ -258,35 +310,34 @@ templates:
     - templates\dig_share_info_message3.png
     roi: chat_area
     use_only_roi: false
-    threshold: 0.85
+    threshold: 0.7
     scales:
     - 1.0
   exit_game:
-    path:
-    - templates/exit_game.png
+    path: templates/exit_game.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
     threshold: 0.85
     scales:
     - 1.0
   server_connection_lost:
     path: templates\server_connection_lost.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
     threshold: 0.85
     scales:
     - 1.0
   server_connection_lost_acknowledge:
     path: templates\server_connection_lost_acknowledge.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
     threshold: 0.85
     scales:
     - 1.0
   technology_spend_diamant_button:
     path: templates\technology_spend_diamant_button.png
     roi: center_dialog
-    use_only_roi: false
+    use_only_roi: true
     threshold: 0.85
     scales:
     - 1.0

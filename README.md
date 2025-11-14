@@ -78,7 +78,13 @@ Each profile ships with a `config.yaml` that drives almost every runtime behavio
 - **`tasks_file`** – Path to the workflow definition file (defaults to `tasks.yaml`).
 
 A matching `config.yaml` is included for LastWar Survival Game (TM) to get a quick bootstrapping.
-This Project is not related with LastWar Survial Game - it uses it only as reference. This is a Universal Game Bot - you can use it also for other Games which can be automated through Picture Recognition and automated requrring Tasks.
+This Project is not related with LastWar Survial Game - it uses it only as reference. This is a Universal Game Bot - you can use it also for other Games which can be automated through Picture Recognition and automated requrring Tasks. 
+
+With the reference (with only german pictures) you can:
+- automatically hunt for treasures, dig them out and also grab gifts
+- automatically spent for alliance technology
+- automatically give alliance help
+- automatically collect alliance gifts 
 
 ---
 

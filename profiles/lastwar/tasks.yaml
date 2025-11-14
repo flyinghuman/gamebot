@@ -261,6 +261,9 @@ tasks:
       name: series.dig_treasure_detected
       value: 1
     failure_steps: []
+  - type: sleep
+    min: '1'
+    max: '2'
   - type: if
     condition:
       type: flag
@@ -269,10 +272,15 @@ tasks:
     then_steps:
     - type: wait_tap_template
       template: dig_button
-      threshold: '{{config.threshold_loose}}'
-      timeout: 10
+      threshold: '0.86'
+      use_roi: true
+      timeout: '10'
       success_detail: Joined treasure dig.
       fail_detail: Dig button missing.
+      required: true
+      stop_on_fail: true
+      success_steps: []
+      failure_steps: []
     - type: sleep
       min: 1
       max: 2
@@ -305,7 +313,7 @@ tasks:
       threshold: '{{config.threshold_loose}}'
       use_roi: true
       timeout: '500'
-      sleep_interval: '0.25'
+      sleep_interval: '0.1'
       success_detail: Treasure reward collected.
       fail_detail: Grab-gift button missing.
       required: false
@@ -522,19 +530,6 @@ tasks:
     threshold: '{{config.threshold_loose}}'
     success_detail: Technology card selected.
     fail_detail: Technology card not found.
-  - type: sleep
-    min: 1
-    max: 2
-  - type: tap_template
-    template: technology_spend_diamant_button
-    threshold: '0.85'
-    use_roi: true
-    required: true
-    stop_on_fail: true
-    success_detail: Technologie Dias gespendet.
-    fail_detail: Fehler bei Tech-Dia spende.
-    success_steps: []
-    failure_steps: []
   - type: sleep
     min: 2
     max: 3
