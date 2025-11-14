@@ -39,17 +39,18 @@ cd gamebot
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python3 bot.py # Start the Bot or run start-bot.bat
+# start your android emulator or start the windows game | configure it in config.yaml:
+# if you use android emulator consider to use android 13 for better performance than the older ones.
 ```
 
-1. Edit `profiles/my-game/config.yaml` to match your device backend, thresholds, ROIs, and other preferences.
-2. Drop your template images into `profiles/my-game/templates/` (each template key may reference up to 10 files).
-3. Adjust `profiles/my-game/tasks.yaml` to describe the workflows you want to run.
-4. Start the bot and choose your profile from *Settings → Configuration Profile* (or update `profiles/active_profile.txt`).
+- Edit `profiles/my-game/config.yaml` to match your device backend, thresholds, ROIs, and other preferences.
+- Drop your template images into `profiles/my-game/templates/` (each template key may reference up to 10 files) - use the lastwar sample profile to have a good starting point.
+- Adjust `profiles/my-game/tasks.yaml` to describe the workflows you want to run or use the gui to define them.
+- Start the bot and choose your profile from *Settings → Configuration Profile* (or update `profiles/active_profile.txt`).
    ```bash
-   python bot.py
+   python3 bot.py
    ```
-5. Use the GUI tabs to monitor activity, tweak settings, capture templates, and maintain your task library.
+- Use the GUI tabs to monitor activity, tweak settings, capture templates, and maintain your task library.
 
 ---
 
@@ -78,9 +79,9 @@ Each profile ships with a `config.yaml` that drives almost every runtime behavio
 - **`tasks_file`** – Path to the workflow definition file (defaults to `tasks.yaml`).
 
 A matching `config.yaml` is included for LastWar Survival Game (TM) to get a quick bootstrapping.
-This Project is not related with LastWar Survial Game - it uses it only as reference. This is a Universal Game Bot - you can use it also for other Games which can be automated through Picture Recognition and automated requrring Tasks. 
+This Project is not related with LastWar Survial Game - it uses it only as a sample reference. This is a Universal Game Bot - you can use it also for other Games which can be automated through Picture Recognition and automated requrring Clicking Tasks. 
 
-With the reference (with only german pictures) you can:
+With the sample reference (with only german pictures in landscape mode) you can:
 - automatically hunt for treasures, dig them out and also grab gifts
 - automatically spent for alliance technology
 - automatically give alliance help
