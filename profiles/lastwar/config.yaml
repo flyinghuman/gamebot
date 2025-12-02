@@ -215,6 +215,14 @@ templates:
     threshold: 0.85
     scales:
     - 1.0
+  ressource_field_hint_button:
+    path:
+    - templates/ressource_field_hint_button.png
+    roi: bottom_left
+    use_only_roi: true
+    threshold: 0.85
+    scales:
+    - 1.0
   dig_button:
     path:
     - templates/dig_button.png

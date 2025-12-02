@@ -1,4 +1,4 @@
-version: 1
+version: 2
 tasks:
 - id: close_any_windows
   name: Close Open Dialogs
@@ -111,6 +111,16 @@ tasks:
       required: false
       stop_on_fail: false
     - type: sleep
+      min: '2'
+      max: '3'
+    - type: tap_template
+      template: bluestacks_fullscreen
+      use_roi: false
+      required: false
+      stop_on_fail: false
+      success_steps: []
+      failure_steps: []
+    - type: sleep
       seconds: 30
     - type: if
       condition:
@@ -127,7 +137,19 @@ tasks:
         required: false
         stop_on_fail: false
       - type: sleep
+        min: '2'
+        max: '3'
+      - type: tap_template
+        template: bluestacks_fullscreen
+        use_roi: false
+        required: false
+        stop_on_fail: false
+        success_steps: []
+        failure_steps: []
+      - type: sleep
         seconds: 30
+      else_steps: []
+    else_steps: []
   - type: set_success
     value: true
   protected-system-task: true
@@ -224,6 +246,100 @@ tasks:
     min: '1'
     max: '2'
   protected-system-task: true
+- id: ressourcefields_dig
+  name: Ressource Fields
+  description: Join shared ressource fileds hunts when new info messages appear.
+  enabled: true
+  trigger:
+    type: interval
+    min_seconds: 5
+    max_seconds: 10
+    run_at_start: true
+  steps:
+  - type: tap_template
+    template: ressource_field_hint_button
+    threshold: '{{config.threshold_loose}}'
+    use_roi: true
+    required: true
+    stop_on_fail: true
+    success_detail: Opened Ressource Field view.
+    fail_detail: Ressource Field Button not found.
+    success_steps:
+    - type: set_flag
+      name: ressourcefield_msg_found
+      value: true
+    - type: set_flag
+      name: series.ressourcefield_msg_detected
+      value: 1
+    failure_steps: []
+  - type: sleep
+    min: 1
+    max: 2
+  - type: if
+    condition:
+      type: flag
+      flag: ressourcefield_msg_found
+      value: true
+    then_steps:
+    - type: wait_tap_template
+      template: dig_button
+      threshold: '0.86'
+      use_roi: true
+      timeout: '10'
+      success_detail: Joined ressourcefield dig.
+      fail_detail: Dig button missing.
+      required: true
+      stop_on_fail: true
+      success_steps: []
+      failure_steps: []
+    - type: sleep
+      min: 1
+      max: 2
+    - type: wait_tap_template
+      template: dig_do_dig_button
+      threshold: '{{config.threshold_loose}}'
+      timeout: 5
+      success_detail: Confirmed dig.
+      fail_detail: Do-dig button missing.
+    - type: sleep
+      min: 1
+      max: 2
+    - type: wait_tap_template
+      template: dig_send_troops_button
+      threshold: '{{config.threshold_loose}}'
+      timeout: 5
+      success_detail: Troops sent.
+      fail_detail: Send troops button missing.
+    - type: set_flag
+      name: ressourcefield_dug
+      value: 1
+    - type: set_flag
+      name: series.ressourcefield_dug
+      value: 1
+    else_steps:
+    - type: set_success
+      value: false
+    - type: set_detail
+      text: No Ressource Hint discovered.
+  stats:
+    counters:
+      ressourcefields_recognized:
+        label: Ressource Field Hints Recognized
+        source: context.ressourcefield_msg_found
+        accumulate: sum
+      ressourcefields_dug:
+        label: Ressource Fields Dug
+        source: context.ressourcefield_dug
+        accumulate: sum
+    series:
+      ressourcefields_recognized_timeline:
+        label: Ressource Fields Recognized Timeline
+        source: series.ressourcefield_msg_found
+        max_points: 500
+      ressourcefields_dug_timeline:
+        label: Ressource Fileds Dug Timeline
+        source: series.ressourcefield_dug
+        max_points: 500
 - id: treasure_dig
   name: Treasure Hunt
   description: Join shared treasure hunts when new dig messages appear.
