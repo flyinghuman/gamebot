@@ -114,6 +114,7 @@ templates:
     path:
     - templates/alliance_button.png
     - templates\alliance_button2.png
+    - templates\alliance_button3.png
     roi: bottom_right
     use_only_roi: false
     threshold: 0.85
@@ -218,8 +219,9 @@ templates:
   ressource_field_hint_button:
     path:
     - templates/ressource_field_hint_button.png
+    - templates\ressource_field_hint_button2.png
     roi: bottom_left
-    use_only_roi: true
+    use_only_roi: false
     threshold: 0.85
     scales:
     - 1.0
@@ -228,9 +230,13 @@ templates:
     - templates/dig_button.png
     - templates/dig_button2.png
     - templates/dig_button3.png
-    - templates/dig_button4.png
+    - templates\dig_do_dig_button_ressource_gold7.png
     - templates/dig_drone1_button.png
     - templates/dig_drone2_button.png
+    - templates\dig_do_dig_button_ressource_gold.png
+    - templates\dig_do_dig_button_ressource_gold2.png
+    - templates\dig_do_dig_button_ressource_gold4.png
+    - templates\dig_do_dig_button_ressource_gold6.png
     roi: center_dialog
     use_only_roi: true
     threshold: 0.85
@@ -239,7 +245,6 @@ templates:
   dig_do_dig_button:
     path:
     - templates/do_dig_button.png
-    - templates/do_dig_button2.png
     - templates/do_dig_button_drone.png
     roi: center_dialog
     use_only_roi: true
