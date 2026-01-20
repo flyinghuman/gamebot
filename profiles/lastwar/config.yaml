@@ -286,6 +286,7 @@ templates:
     path:
     - templates/close_x.png
     - templates\alliance_help-close_button.png
+    - templates\close_x3.png
     roi: center_dialog
     use_only_roi: false
     threshold: 0.85
